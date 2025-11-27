@@ -20,6 +20,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/chat/rooms/{room}/join', [ChatController::class, 'joinRoom'])->name('chat.room.join');
     Route::post('/chat/rooms/{room}/leave', [ChatController::class, 'leaveRoom'])->name('chat.room.leave');
     Route::post('/chat/rooms/{room}/messages', [ChatController::class, 'sendMessage'])->name('chat.message.send');
+    Route::post('/chat/room/{room}/add-member', [ChatController::class, 'addMember'])->name('chat.room.addMember');
+
 });
 
 Route::get('/', function () {

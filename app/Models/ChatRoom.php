@@ -11,7 +11,17 @@ class ChatRoom extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'is_private'];
+    protected $fillable = [
+        'name',
+        'description',
+        'is_private',
+        'created_by',
+    ];
+
+    protected $casts = [
+    'is_private' => 'boolean',
+    ];
+
 
     public function users(): BelongsToMany
     {

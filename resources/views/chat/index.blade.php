@@ -4,6 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4">
+            <!-- Create New Room -->
             <div class="card">
                 <div class="card-header">
                     <h5>Create New Room</h5>
@@ -20,7 +21,7 @@
                             <textarea class="form-control" id="description" name="description" rows="2"></textarea>
                         </div>
                         <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="is_private" name="is_private">
+                            <input type="checkbox" class="form-check-input" id="is_private" name="is_private" value="1">
                             <label class="form-check-label" for="is_private">Private Room</label>
                         </div>
                         <button type="submit" class="btn btn-primary">Create Room</button>
@@ -28,6 +29,7 @@
                 </div>
             </div>
 
+            <!-- My Rooms -->
             <div class="card mt-4">
                 <div class="card-header">
                     <h5>My Rooms</h5>
@@ -75,10 +77,14 @@
                                 @if($room->isMember(Auth::user()))
                                     <a href="{{ route('chat.room.show', $room) }}" class="btn btn-sm btn-primary">Enter Room</a>
                                 @else
-                                    <form action="{{ route('chat.room.join', $room) }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm btn-success">Join Room</button>
-                                    </form>
+                                    @if(!$room->is_private)
+                                        <form action="{{ route('chat.room.join', $room) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-success">Join Room</button>
+                                        </form>
+                                    @else
+                                        <span class="badge bg-warning">Private Room</span>
+                                    @endif
                                 @endif
                             </div>
                         </div>
